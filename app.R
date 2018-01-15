@@ -1,4 +1,4 @@
-# Shiny Ap of NASS EDR data
+# Shiny App of NASS EDR data
 #
 # Version pushed to Shiny server January 13, 2018
 
@@ -8,7 +8,7 @@
 library(shiny)
 library(dplyr)
 library(ggvis)
-library(ggplot2)
+#library(ggplot2)
 library(data.table)
 
 # Get make/model lists
@@ -66,6 +66,9 @@ ratios <- calc_ratios(edr)
 # *****************************
 
 ui <- fluidPage(
+  # Google Analytics Code
+  tags$head(includeScript('google-analytics.js')),
+  
   titlePanel("Airbag Explorer"),
   
   # Hiding Error Messages
@@ -140,6 +143,7 @@ server <- function(input, output, session) {
     temp_df <- mutate(temp_df, pdf = ifelse(year < 2008, ".PDF", ".pdf"))
     temp_df <- mutate(temp_df, EDR.Report = ifelse(year > 2013, "", createEDRlink(casestr,veh_no, year, pdf)))
     temp_df <- select(temp_df, -caseid, -casestr, -veh_no, -year, -pdf)
+    names(temp_df) <- c("Year", "Make", "Model", "Damage", "Front Airbag Status", "Impact Speed [mph]", "Longitudinal dV [mph]", "NASS CaseID", "EDR Report") 
     temp_df
   },
   
