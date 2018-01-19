@@ -2,7 +2,7 @@
 #
 # Version pushed to Shiny server January 13, 2018
 
-# setwd("C:/_Files/NASS/deployed") # delete when pushing to the server
+setwd("C:/_Files/NASS/deployed") # delete when pushing to the server
 
 # Grabbing libraries
 library(shiny)
