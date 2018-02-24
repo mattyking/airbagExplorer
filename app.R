@@ -22,7 +22,7 @@ r_factor <- c('0-4.9', '5-9.9', '10-14.9', '15-19.9', '20-24.9', '25-29.9', '30-
 
 # Creating link to NASS website
 createLink <- function(x) {
-  sprintf(paste0('<a href="http://www-nass.nhtsa.dot.gov/nass/cds/CaseForm.aspx?xsl=main.xsl&CaseID=',x,'" target="_blank">',x,'</a>', sep=""))
+  sprintf(paste0('<a href="https://crashviewer.nhtsa.dot.gov/nass-cds/CaseForm.aspx?xsl=main.xsl&CaseID=',x,'" target="_blank">',x,'</a>', sep=""))
 }
 
 # Creating link to EDR printouts
