@@ -2,14 +2,14 @@
 #
 # Version pushed to Shiny server January 18, 2018
 
-# setwd("C:/_Files/NASS/deployed") # delete when pushing to the server
+setwd("C:/_Files/NASS/deployed") # delete when pushing to the server
 
 # Grabbing libraries
 library(shiny)
 library(dplyr)
 library(ggvis)
-#library(ggplot2)
 library(data.table)
+
 
 # Get make/model lists
 edr <- read.csv("nass_edr.csv", stringsAsFactors = FALSE)
@@ -27,7 +27,7 @@ createLink <- function(x) {
 
 # Creating link to EDR printouts
 createEDRlink <- function(case, vehnum, year1, pdf) {
-  sprintf(paste('<a href="http://www.collisionintelligence.com/edr_reports/', case, '-v',vehnum, pdf,'" target="_blank">',case,'</a>', sep=""))
+  sprintf(paste('<a href="https://s3-us-west-2.amazonaws.com/cdr-downloads/', case, '-v',vehnum, pdf,'" target="_blank">',case,'</a>', sep=""))
 }
 
 # Calculating deployment ratios (5 mph bins)
@@ -147,7 +147,10 @@ server <- function(input, output, session) {
     temp_df
   },
   
-  options = list(searching = FALSE), escape = FALSE)
+  options = list(
+                  searching = FALSE,
+                  columnDefs = list(list(className = 'dt-center', targets = "_all"))
+                ), escape = FALSE)
  
   # Linking models to the veh make 
   observe({
